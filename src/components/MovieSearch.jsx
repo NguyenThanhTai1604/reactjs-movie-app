@@ -1,6 +1,4 @@
 import { useContext } from "react";
-import Modal from "react-modal";
-import YouTube from "react-youtube";
 import { MovieContext } from "../context/MovieProvider";
 
 export default function MovieSearch({ title, data }) {

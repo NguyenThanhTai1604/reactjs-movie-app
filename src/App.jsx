@@ -41,12 +41,10 @@ function App() {
           Authorization: `Bearer ${import.meta.env.VITE_TMDB_ACCESS_TOKEN}`,
         },
       };
-      const url1 = `https://api.themoviedb.org/3/movie/popular?api_key=${
-        import.meta.env.VITE_TMDB_API_KEY
-      }&language=vi-US&page=1`;
-      const url2 = `https://api.themoviedb.org/3/movie/top_rated?api_key=${
-        import.meta.env.VITE_TMDB_API_KEY
-      }&language=vi-US&page=1`;
+      const url1 = `https://api.themoviedb.org/3/movie/popular?api_key=${import.meta.env.VITE_TMDB_API_KEY
+        }&language=vi-US&page=1`;
+      const url2 = `https://api.themoviedb.org/3/movie/top_rated?api_key=${import.meta.env.VITE_TMDB_API_KEY
+        }&language=vi-US&page=1`;
 
       const [res1, res2] = await Promise.all([
         fetch(url1, options),
@@ -77,7 +75,7 @@ function App() {
         )}
       </div>
     </MovieProvider>
-  );
+  )
 }
 
 export default App;

@@ -1,5 +1,4 @@
 import { useContext } from "react";
-import ImgTemp from "../assets/temp-1.jpeg";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import { MovieContext } from "../context/MovieProvider";

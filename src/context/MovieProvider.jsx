@@ -60,7 +60,7 @@ const MovieProvider = ({ children }) => {
       >
         <YouTube videoId={trailerKey} opts={opts} />
       </Modal>
-      ;
+
     </MovieContext.Provider>
   );
 };
