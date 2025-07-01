@@ -1,37 +1,15 @@
 import { useContext } from "react";
-import ImgTemp from "../assets/temp-1.jpeg";
-import Carousel from "react-multi-carousel";
-import "react-multi-carousel/lib/styles.css";
+import Modal from "react-modal";
+import YouTube from "react-youtube";
 import { MovieContext } from "../context/MovieProvider";
 
-const responsive = {
-  superLargeDesktop: {
-    // the naming can be any, depends on you.
-    breakpoint: { max: 4000, min: 3000 },
-    items: 10,
-  },
-  desktop: {
-    breakpoint: { max: 3000, min: 1024 },
-    items: 7,
-  },
-  tablet: {
-    breakpoint: { max: 1200, min: 600 },
-    items: 3,
-  },
-  mobile: {
-    breakpoint: { max: 600, min: 0 },
-    items: 2,
-  },
-};
-
-export default function MovieList({ title, data = [] }) {
+export default function MovieSearch({ title, data }) {
   const { handleTrailer } = useContext(MovieContext);
   return (
     <div className="text-white p-10 mb-10">
       <h2 className="uppercase text-xl mb-4">{title}</h2>
-      <Carousel responsive={responsive} className="flex items-center space-x-4">
+      <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
         {data &&
-          data.length > 0 &&
           data.map((item) => (
             <div
               key={item.id}
@@ -53,7 +31,7 @@ export default function MovieList({ title, data = [] }) {
               </div>
             </div>
           ))}
-      </Carousel>
+      </div>
     </div>
   );
 }

@@ -41,7 +41,7 @@ export default function Banner() {
         </div>
         <div className="w-[50%] flex items-center justify-center">
           <div className="w-[300px] h-[400px] relative group cursor-pointer">
-            <img src={ImgTemp} className="w-full h-full object-cover " />
+            <img src={ImgTemp} className="w-full h-full object-cover" />
             <div className="w-full h-full absolute top-0 left-0 flex items-center justify-center backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-in-out">
               <img src={IconPlay} alt="play" className="w-16 h-16" />
             </div>
