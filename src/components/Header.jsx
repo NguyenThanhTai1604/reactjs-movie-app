@@ -99,12 +99,12 @@ export default function Header({ onSearch }) {
               )}
             </div>
           ) : (
-            <a
-              href="/login"
+            <Link
+              to={"/login"}
               className="text-sm text-white px-3 py-1 rounded border border-white hover:bg-white hover:text-black transition"
             >
               Login
-            </a>
+            </Link>
           )}
         </div>
       </div>
