@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import Modal from "react-modal";
 import YouTube from "react-youtube";
 
@@ -15,6 +15,9 @@ const opts = {
 const MovieProvider = ({ children }) => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [trailerKey, setTrailerKey] = useState("");
+  const [movieSearch, setMovieSearch] = useState([]);
+  const [movies, setMovies] = useState([]);
+  const [movieRate, setMovieRate] = useState([]);
   const handleTrailer = async (id) => {
     setTrailerKey("");
     try {
@@ -36,8 +39,52 @@ const MovieProvider = ({ children }) => {
     }
   };
 
+  const handleSearch = async (searchVal) => {
+    setMovieSearch([]);
+    try {
+      const url = `https://api.themoviedb.org/3/search/movie?query=${searchVal}&include_adult=false&language=en-US&page=1`;
+      const options = {
+        method: "GET",
+        headers: {
+          accept: "application/json",
+          Authorization: `Bearer ${import.meta.env.VITE_TMDB_ACCESS_TOKEN}`,
+        },
+      };
+
+      const response = await fetch(url, options);
+      const data = await response.json();
+      setMovieSearch(data.results);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    const fetchMovies = async () => {
+      const options = {
+        method: "GET",
+        headers: {
+          accept: "application/json",
+          Authorization: `Bearer ${import.meta.env.VITE_TMDB_ACCESS_TOKEN}`,
+        },
+      };
+
+      const url1 = `https://api.themoviedb.org/3/movie/popular?api_key=${import.meta.env.VITE_TMDB_API_KEY}&language=vi-US&page=1`;
+      const url2 = `https://api.themoviedb.org/3/movie/top_rated?api_key=${import.meta.env.VITE_TMDB_API_KEY}&language=vi-US&page=1`;
+
+      const [res1, res2] = await Promise.all([fetch(url1, options), fetch(url2, options)]);
+      const data1 = await res1.json();
+      const data2 = await res2.json();
+
+      setMovies(data1.results);
+      setMovieRate(data2.results);
+    };
+
+    fetchMovies();
+  }, []);
+
   return (
-    <MovieContext.Provider value={{ handleTrailer }}>
+    <MovieContext.Provider value={{ handleTrailer, movieSearch, handleSearch, movies, movieRate }}>
       {children}
       <Modal
         isOpen={modalIsOpen}
